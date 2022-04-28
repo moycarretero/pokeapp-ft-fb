@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Pokemon;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PokemonController  extends AbstractController
@@ -59,4 +63,32 @@ class PokemonController  extends AbstractController
 
         return $this->render("pokemon/listPoke.html.twig", ["pokemons" => $pokemons]);
     }
+
+
+    #[Route("/insert/pokemon")]
+    public function insertPokemon(EntityManagerInterface $doctrine)
+    {
+        $pokemon1 = new Pokemon();
+
+        $pokemon1->setName("Pikachu");
+        $pokemon1->setDescription("Cuanto más potente es la energía eléctrica que genera este Pokémon, más suaves y elásticas se vuelven las bolsas de sus mejillas.");
+        $pokemon1->setImage("https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png");
+        $pokemon1->setCode("025");
+
+        $pokemon2 = new Pokemon();
+
+        $pokemon2->setName("PEPE");
+        $pokemon2->setDescription("descripcion");
+        $pokemon2->setImage("https://assets.pokemon.com/assets/cms2/img/pokedex/full/030.png");
+        $pokemon2->setCode("030");
+
+        $doctrine->persist($pokemon1);
+        $doctrine->persist($pokemon2);
+        $doctrine->flush(); 
+
+        return new Response("Pokemon insertado correctamente");
+
+    }
+
+
 }
