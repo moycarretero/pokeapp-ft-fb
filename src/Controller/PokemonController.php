@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Debilidad;
 use App\Entity\Pokemon;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,12 +38,23 @@ class PokemonController  extends AbstractController
     #[Route("/insert/pokemon")]
     public function insertPokemon(EntityManagerInterface $doctrine)
     {
+        $debilidad1 = new Debilidad();
+        $debilidad1->setTipo("veneno");
+        $debilidad2 = new Debilidad();
+        $debilidad2->setTipo("agua");
+        $debilidad3 = new Debilidad();
+        $debilidad3->setTipo("fuego");
+
         $pokemon1 = new Pokemon();
 
+        
         $pokemon1->setName("Pikachu");
         $pokemon1->setDescription("Cuanto más potente es la energía eléctrica que genera este Pokémon, más suaves y elásticas se vuelven las bolsas de sus mejillas.");
         $pokemon1->setImage("https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png");
         $pokemon1->setCode("025");
+
+        $pokemon1->addDebilidade($debilidad1);
+        $pokemon1->addDebilidade($debilidad2);
 
         $pokemon2 = new Pokemon();
 
@@ -53,6 +65,9 @@ class PokemonController  extends AbstractController
 
         $doctrine->persist($pokemon1);
         $doctrine->persist($pokemon2);
+        $doctrine->persist($debilidad1);
+        $doctrine->persist($debilidad2);
+        $doctrine->persist($debilidad3);
         $doctrine->flush();
 
         $pokemon3 = new Pokemon();
