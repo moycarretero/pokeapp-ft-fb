@@ -126,5 +126,10 @@ class PokemonController  extends AbstractController
         return $this->renderForm("pokemon/newPoke.html.twig", ["pokemonForm" => $form]);
     }
 
+    #[Route("/react/pokemon")]
+    public function reactPokemon()
+    {
+        return $this->render("pokemon/reactPoke.html.twig");
+    }
 
 }
