@@ -1,0 +1,16 @@
+{% extends 'pokemon/basePoke.html.twig' %}
+
+ 
+
+{% block body %}
+
+    {% for mensaje in app.flashes("success") %}
+
+        <p>{{mensaje}}</p>
+    {% endfor %}
+
+    {{ form_start(pokemonForm) }}
+        {{ form_widget(pokemonForm) }}
+        <button type="submit">Añadir</button>
+    {{ form_end(pokemonForm) }}
+{% endblock %}
