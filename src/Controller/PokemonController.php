@@ -7,6 +7,7 @@ use App\Entity\Pokemon;
 use App\Form\PokemonType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -106,6 +107,7 @@ class PokemonController  extends AbstractController
     }
 
     #[Route("/edit/pokemon/{id}", name: "editPokemon")]
+    #[IsGranted('ROLE_ADMIN')]
     public function editPokemon(Request $request, EntityManagerInterface $doctrine, $id)
     {
 

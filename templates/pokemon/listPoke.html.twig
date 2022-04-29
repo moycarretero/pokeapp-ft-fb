@@ -17,7 +17,9 @@
 						<h5 class="card-title">{{pokemon.name}}</h5>
 						<p class="card-text">{{pokemon.description}}</p>
 						<a href="{{path("infopokemon", {"id": pokemon.id} )}}" class="btn btn-primary">Más Info</a>
+						{% if is_granted('ROLE_ADMIN')%}
 						<a href="{{path("editPokemon", {"id": pokemon.id} )}}" class="btn btn-primary">Editar Pokemon</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
